@@ -1,11 +1,19 @@
-import Card from './Card';
+import Card from '../card/Card';
 
-export default function Cards({ characters }) {
+export default function Cards({ characters, onClose }) {
    // console.log(characters);
    //* props = { characters: [ --- ] }
-   //* characters = [ {R}, {M}, {B}, {S} ]
+   //* characters = [ {R}, {M}, {B}, {S} ] array con personajes
+
+   //invocamos para cada personaje un card
    return (
-      <div>
+      <div
+          style={{
+               display: "flex",
+               flexWrap: "wrap",
+               justifyContent: "space-evenly",
+          }}
+      >
          {
             characters.map(character => (
                <Card
@@ -17,10 +25,12 @@ export default function Cards({ characters }) {
                   gender={character.gender}
                   origin={character.origin.name}
                   image={character.image}
-                  onClose={() => window.alert('Emulamos que se cierra la card')}
+                  onClose={onClose}
                />
             ))
          }
       </div>
    );
 }
+
+//Para que no rompa tiene que tener siempre una --> Key <-- para reconocer los personajes

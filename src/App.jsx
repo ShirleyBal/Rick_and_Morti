@@ -1,17 +1,27 @@
 import { useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import './App.css';
+import axios from "axios";
 import Cards from './components/cards/Cards.jsx';
 import Nav from "./components/nav/Nav.jsx";
 //import characters from './data.js';
-import axios from "axios";
+import About from "./components/about/About.jsx";
+import Detail from "./components/detail/detail.jsx";
+import Notfound from "./components/notfound/Notfound.jsx";
+import Form from "./components/form/Form.jsx";
+//buenas practicas las librerias arriba
 
 //conectamos con la API con axios
 const URL = "https://rym2.up.railway.app/api/character"
 const API_KEY = "henrystaff"
 
 function App() {
+   const navigate = useNavigate(); // una F(path) {redirije}
+   const location = useLocation();
 
    const [characters, setCharacters] = useState([]);
+
+
    //creamos la f() para agregar un nuevo personaje
    //solicitandolo a la API
    function onSearch(id) {
@@ -29,19 +39,69 @@ function App() {
             } else {
                window.alert('¡No hay personajes con este ID!Elija desde el 1 al 826');
             }
-         }
-      );
+         });
+      navigate("/home"); //para reutilizarlo y que regrese a home al agregar
    }
    //En nuestro character tenemos los datos y en el id el indice
    const onClose = id => {
       setCharacters(characters.filter(char => char.id !== Number(id)))
    }
+   
+   //Login
+   const navigate = useNavigate();
+   const [access, setAccess] = useState(false);
+   const EMAIL = 'ejemplo@gmail.com';
+   const PASSWORD = '123456';
+   //si todo esta bien va al home
+   function login(userData) { //que se lo pasamos a Form
+      if (userData.password === PASSWORD && userData.email === EMAIL) {
+         setAccess(true);
+         navigate('/home');
+      }else{
+         alert("Credenciales incorrectas");
+      }
+   }
+   
+   // Cuando se modifique access, si no se accedio no entra por url tampoco
+   useEffect(() => {
+      //si quiero entrar automatico poner /home
+      !access && navigate('/');
+   }, [access]);
+   
+   //para cerrar sesion
+   function logout() {
+      setAccess(false);
+   }
 
+   //Que se va a ver en App
    return (
       <div className='App'>
-         <Nav onSearch={onSearch}/>
+         {
+            location.pathname !== "/" && <Nav onSearch={onSearch} logout= {logout}/>
+         } 
+         <Routes>
+            <Route
+            path="/"
+            element= {<Form login={login} />}
+            />
+            <Route
+            path="/home"
+            element= {<Cards characters={characters} onClose= {onClose}/>}
+            />
+            <Route
+            path="/about"
+            element= {<About/>}
+            />
+            <Route
+            path="/detail/:id"
+            element= {<Detail/>}
+            />
+            <Route
+            path="*"
+            element= {<Notfound/>}
+            />
+         </Routes>
          <hr />
-         <Cards characters={characters} onClose= {onClose}/>
       </div>
    );
 }
@@ -56,5 +116,10 @@ const onSearch = (id) => {
       setCharacters([...characters, example]);
       //estamos recibiendo un array entonces hacemos la copia
    }
+
+<Routes>
+     <Route>que es lo que se va a ver en que link</Route>
+</Routes>
+
 */
 

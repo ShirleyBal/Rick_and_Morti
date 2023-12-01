@@ -1,8 +1,35 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addFav, removeFav } from "../../redux/actions";
 
 export default function Card(props) {
    // console.log(props); --> es un obj {}
    //* props = { id:.., name:.., onclose: () => {}}
+
+   //props = {id, name, status..} => character
+
+   const dispatch =  useDispatch(); // funcion({type, payload})
+   const [isFav, setIsFav] = useState(false);
+   const handleFavorite = () => {
+      if(isFav){
+         setIsFav(false);
+         dispatch(removeFav(props.id));
+      }else{
+         setIsFav(true);
+         dispatch(addFav(props))
+      }
+   } //lo agrega a la lista
+   
+   const myFavorites = useSelector(state => state.myFavorites);
+   useEffect(() => {
+      myFavorites.forEach((fav) => {
+         if (fav.id === props.id) {
+            setIsFav(true);
+         }
+      });
+   }, [myFavorites]);
+
    return (
       <div
          style= {{
@@ -11,7 +38,14 @@ export default function Card(props) {
             padding: "20px",
             borderRadius: "15px",
          }}
-      >
+      >  
+         {
+            isFav ? (
+               <button onClick={handleFavorite}>❤️</button>
+            ) : (
+               <button onClick={handleFavorite}>🤍</button>
+            )
+         }
         
          <button onClick={() =>props.onClose(props.id)}>X</button>
             <h2>{props.name}</h2>

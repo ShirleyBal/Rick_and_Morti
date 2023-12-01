@@ -1,4 +1,5 @@
-import Card from '../card/Card';
+import Card from "../card/Card.jsx";
+
 
 export default function Cards({ characters, onClose }) {
    // console.log(characters);
@@ -15,6 +16,9 @@ export default function Cards({ characters, onClose }) {
           }}
       >
          {
+            !characters.length
+               ? <h2>Por favor ingrese un id...</h2>
+               :
             characters.map(character => (
                <Card
                   key={character.id}

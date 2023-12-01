@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { removeFav } from "./redux/actions.js";
 import './App.css';
 import axios from "axios";
 import Cards from './components/cards/Cards.jsx';
@@ -7,9 +9,11 @@ import Nav from "./components/nav/Nav.jsx";
 //import characters from './data.js';
 import About from "./components/about/About.jsx";
 import Detail from "./components/detail/detail.jsx";
+import Favorites from "./components/favorites/Favorites.jsx";
 import Notfound from "./components/notfound/Notfound.jsx";
 import Form from "./components/form/Form.jsx";
-//buenas practicas las librerias arriba
+
+//buenas practicas las librerias arriba y componentes abajo
 
 //conectamos con la API con axios
 const URL = "https://rym2.up.railway.app/api/character"
@@ -18,9 +22,9 @@ const API_KEY = "henrystaff"
 function App() {
    const navigate = useNavigate(); // una F(path) {redirije}
    const location = useLocation();
+   const dispatch = useDispatch(); //para que la X funcione en el fav tambien
 
    const [characters, setCharacters] = useState([]);
-
 
    //creamos la f() para agregar un nuevo personaje
    //solicitandolo a la API
@@ -42,13 +46,15 @@ function App() {
          });
       navigate("/home"); //para reutilizarlo y que regrese a home al agregar
    }
+
    //En nuestro character tenemos los datos y en el id el indice
    const onClose = id => {
-      setCharacters(characters.filter(char => char.id !== Number(id)))
+      setCharacters(characters.filter(char => char.id !== Number(id)));
+      dispatch(removeFav(id));
    }
    
+
    //Login
-   const navigate = useNavigate();
    const [access, setAccess] = useState(false);
    const EMAIL = 'ejemplo@gmail.com';
    const PASSWORD = '123456';
@@ -63,8 +69,7 @@ function App() {
    }
    
    // Cuando se modifique access, si no se accedio no entra por url tampoco
-   useEffect(() => {
-      //si quiero entrar automatico poner /home
+   useEffect(() => { //si quiero entrar automatico poner /home
       !access && navigate('/');
    }, [access]);
    
@@ -77,7 +82,7 @@ function App() {
    return (
       <div className='App'>
          {
-            location.pathname !== "/" && <Nav onSearch={onSearch} logout= {logout}/>
+            location.pathname !== "/" && <Nav onSearch={onSearch} logout={logout}/>
          } 
          <Routes>
             <Route
@@ -86,7 +91,7 @@ function App() {
             />
             <Route
             path="/home"
-            element= {<Cards characters={characters} onClose= {onClose}/>}
+            element= {<Cards characters={characters} onClose={onClose}/>}
             />
             <Route
             path="/about"
@@ -97,11 +102,14 @@ function App() {
             element= {<Detail/>}
             />
             <Route
+            path="/favorites"
+            element= {<Favorites onClose={onClose}/>}
+            />
+            <Route
             path="*"
             element= {<Notfound/>}
             />
          </Routes>
-         <hr />
       </div>
    );
 }

@@ -5,7 +5,7 @@
 export default function validation(input){
   //crear un errors
   const errors = {};
-  const regexEmail = /\$+@\S+\.\S+/;
+  const regexEmail = /\S+@\S+\.\S+/;
   const regexPassword = new RegExp("[0-9]");
 
   //* email

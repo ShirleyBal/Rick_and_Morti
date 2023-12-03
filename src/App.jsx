@@ -16,8 +16,8 @@ import Form from "./components/form/Form.jsx";
 //buenas practicas las librerias arriba y componentes abajo
 
 //conectamos con la API con axios
-const URL = "https://rym2.up.railway.app/api/character"
-const API_KEY = "henrystaff"
+
+const URL = "https://rickandmortyapi.com/api/character"
 
 function App() {
    const navigate = useNavigate(); // una F(path) {redirije}
@@ -36,7 +36,7 @@ function App() {
       if(characterId.length){
          return alert(`${characterId[0].name} ya existe!`)
       }
-      axios(`${URL}/${id}?key=${API_KEY}`).then(
+      axios(`${URL}/${id}?key=`).then(
          ({ data }) => {
             if (data.name) {
                setCharacters([...characters, data]);

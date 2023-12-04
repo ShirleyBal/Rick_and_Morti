@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 import SearchBar from "../searchbar/SearchBar";
-
+import styles from "./Nav.module.css"
 
 export default function Nav(props) {
 
     return (
-       <div>
+       <div className={styles.navbuttons}>
          <NavLink to="/home">
             <button>Home</button>
          </NavLink>

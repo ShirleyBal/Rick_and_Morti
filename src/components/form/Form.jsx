@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import validation from "../../utils/validation";
+import styles from "./Form.module.css"
 
 const banner= "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/2560px-Rick_and_Morty.svg.png"
 
@@ -36,7 +37,7 @@ export default function Form(props) {
 
       
     return (
-        <div>
+        <div className={styles.container}>
             <img
                 src={banner}
                 style={{width:"300px"}}
@@ -65,7 +66,6 @@ export default function Form(props) {
                 onChange={handleChange}
                 />
                 <p style={{color: "red"}}>{errors.password ? errors.password : null}</p>
-                <hr/>
 
                 <button 
                 type="submit"

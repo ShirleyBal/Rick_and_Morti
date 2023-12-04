@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Searchbar.module.css"
 
 //La barra de BUSCAR
 export default function SearchBar(props) {
@@ -24,7 +25,7 @@ export default function SearchBar(props) {
    }
 
    return (
-      <div>
+      <div className={styles.container}>
          <input 
          type="text"
          name="search"

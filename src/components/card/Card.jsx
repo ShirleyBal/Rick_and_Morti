@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addFav, removeFav } from "../../redux/actions";
+import styles from "./Card.module.css"
 
 export default function Card(props) {
    // console.log(props); --> es un obj {}
@@ -31,14 +32,8 @@ export default function Card(props) {
    }, [myFavorites]);
 
    return (
-      <div
-         style= {{
-            backgroundColor: "grey",
-            margin: "20px",
-            padding: "20px",
-            borderRadius: "15px",
-         }}
-      >  
+      <div className={styles.container}>
+      
          {
             isFav ? (
                <button onClick={handleFavorite}>❤️</button>

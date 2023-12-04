@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import styles from "./Detail.module.css"
 
-const URL = "https://rym2.up.railway.app/api/character"
-const API_KEY = "henrystaff"
+const URL = "https://rickandmortyapi.com/api/character"
 
 export default function Detail(props) {
 
@@ -15,7 +15,7 @@ export default function Detail(props) {
 
     //hace un axios para traer data, recibe un obj{} lo trae con el useParams
     useEffect(() => {
-        axios(`${URL}/${id}?key=${API_KEY}`).then(
+        axios(`${URL}/${id}?key=`).then(
            ({ data }) => {
               if (data.name) {
                  setCharacter(data);
@@ -28,7 +28,7 @@ export default function Detail(props) {
      }, [id]);
 
     return (
-       <div>
+       <div className={styles.container}>
           <h1>Detail</h1>
           <h2>{character.name}</h2>
           <img src={character.image} alt= {character.name} />

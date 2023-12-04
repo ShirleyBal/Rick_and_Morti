@@ -1,0 +1,13 @@
+.container input{
+    padding: 5px;
+    border-radius: 5px;
+} 
+
+.container button {
+    background-color: black;
+    color: blueviolet;
+    &:hover {
+        color: blueviolet;
+        background-color: rgb(16, 7, 46)
+    }
+}

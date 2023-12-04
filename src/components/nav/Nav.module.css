@@ -1,0 +1,9 @@
+.navbuttons button {
+    background-color: black;
+    color: blueviolet;
+    margin: 5px;
+    &:hover {
+        color: blueviolet;
+        background-color: rgb(16, 7, 46)
+    }
+}

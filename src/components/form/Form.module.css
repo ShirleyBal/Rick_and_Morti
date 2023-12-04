@@ -1,0 +1,44 @@
+/*
+
+*/
+.container {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(94, 96, 211);
+    width: 120%; /* Ancho*/
+    max-width: 600px; /* Opcional: establece un ancho máximo */
+    height: 200%; /* Ajusta la altura según tus necesidades */
+    align-items: center;
+    justify-content: center;
+
+    /* Agrega el sombreado aquí */
+    -webkit-box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.container button {
+    background-color: black;
+    color: blueviolet;
+    &:hover {
+        color: blueviolet;
+        background-color: rgb(16, 7, 46)
+    }
+}
+
+.container img {
+    padding: 20px;
+    width:"300px"
+}
+
+.container label {
+    color: black;
+    font-weight: bold;
+    
+}
+
+.container input { /* donde se escribe */
+    padding: 10px;
+    border-radius: 10px;
+}

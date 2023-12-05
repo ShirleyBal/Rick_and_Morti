@@ -7,12 +7,12 @@
     border-radius: 10px;
     background-color: rgb(94, 96, 211);
     width: 120%; /* Ancho*/
-    max-width: 600px; /* Opcional: establece un ancho máximo */
-    height: 200%; /* Ajusta la altura según tus necesidades */
+    max-width: 600px; 
+    height: 200%; 
     align-items: center;
     justify-content: center;
 
-    /* Agrega el sombreado aquí */
+    /* Sombreado aquí */
     -webkit-box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
     box-shadow: 25px 32px 5px 0px rgba(0, 0, 0, 0.75);
